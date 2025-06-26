@@ -1,0 +1,310 @@
+/* 
+  MovieRama Styling 
+  Modern glass header, responsive grid, clean cards, custom scrolls.
+*/
+
+/* -- Body & backgrounds -- */
+body {
+  font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+  margin: 0;
+  background: #18192b;
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* -- Glassmorphic Header -- */
+header {
+  padding: 22px 20px;
+  background: rgba(36, 36, 62, 0.8);
+  box-shadow: 0 2px 24px #08085a33;
+  backdrop-filter: blur(7px);
+  border-bottom: 1.5px solid #272753;
+  border-radius: 0 0 18px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 74px;
+}
+
+/* -- Title/Logo -- */
+header h1 {
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #b7aaff 30%, #f7dada 70%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  margin: 0 20px 0 0;
+  padding: 0;
+  text-shadow: 0 1px 7px #31216a33;
+}
+
+/* -- Section title (Now Playing/Search Results) -- */
+#movieSectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 18px 0 8px 28px;
+  color: #b9b8f6;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 10px #22224632;
+}
+@media (max-width: 600px) {
+  #movieSectionTitle {
+    margin: 14px 0 6px 10px;
+    font-size: 1.1rem;
+  }
+}
+
+/* -- Search bar with modern look -- */
+#searchInput {
+  padding: 11px 22px;
+  font-size: 17px;
+  border-radius: 20px;
+  border: none;
+  width: 320px;
+  background: rgba(40, 40, 70, 0.93);
+  color: #fafaff;
+  transition: box-shadow 0.22s, border 0.18s;
+  box-shadow: 0 2px 12px #14144844;
+  outline: none;
+}
+#searchInput:focus {
+  box-shadow: 0 2px 20px #8676ff66, 0 0 0 3px #7d69ea55;
+  border: 1.5px solid #a394f9;
+  background: #232344;
+  color: #fff;
+}
+
+/* -- Grid of movies (responsive) -- */
+#movieList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 26px;
+  padding: 32px;
+  min-height: 60vh;
+}
+
+/* -- Each movie as a card -- */
+.movie {
+  background: #232344;
+  border-radius: 18px;
+  padding: 16px 10px 10px 10px;
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.22);
+  border: 1px solid #262646;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, background 0.18s, transform 0.18s;
+  min-height: 370px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.movie:hover {
+  box-shadow: 0 12px 32px 0 #08085a8c;
+  background: #31226a;
+  transform: scale(1.045);
+}
+
+/* -- Movie poster styling -- */
+.movie img {
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.22);
+  width: 100%;
+  max-width: 155px;
+  aspect-ratio: 2/3;
+  background: #22223d;
+  object-fit: cover;
+}
+
+/* -- Movie title and info -- */
+.movie h3 {
+  font-size: 17px;
+  margin: 8px 0 3px 0;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+.movie p {
+  font-size: 14px;
+  margin: 3px 0;
+  color: #ddddff;
+  text-align: center;
+}
+
+/* -- Loader at the bottom for infinite scroll -- */
+#loader {
+  border-radius: 10px;
+  background: #242444;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.19);
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: white;
+  font-size: 16px;
+  margin: 36px auto 28px auto;
+  width: 170px;
+  display: block;
+}
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  border-top-color: #4646a5;
+  animation: spin 0.8s linear infinite;
+  margin-right: 10px;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* -- "Expand" area for trailer/reviews/similar -- */
+.extra {
+  margin-top: 10px;
+  font-size: 14px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s cubic-bezier(0.52, 0.01, 0.43, 1.09), padding 0.3s,
+    opacity 0.6s;
+  padding: 0 0;
+  opacity: 0;
+  width: 100%;
+}
+.movie.expanded .extra {
+  max-height: 1800px;
+  padding: 10px 0 0 0;
+  opacity: 1;
+}
+
+/* -- Reviews as cards -- */
+.extra .reviews {
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 6px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #383a5a #232344;
+}
+.extra .reviews::-webkit-scrollbar {
+  width: 8px;
+  background: #232344;
+  border-radius: 10px;
+}
+.extra .reviews::-webkit-scrollbar-thumb {
+  background: #383a5a;
+  border-radius: 10px;
+  border: 2px solid #232344;
+}
+.extra .reviews::-webkit-scrollbar-thumb:hover {
+  background: #6157b3;
+}
+.extra .review-card {
+  background: linear-gradient(90deg, #232344 80%, #2e2e56 100%);
+  border-left: 4px solid #8d78f6;
+  border-radius: 9px;
+  padding: 10px 14px 10px 18px;
+  box-shadow: 0 2px 10px #24245a36;
+  font-size: 15px;
+  color: #edeafd;
+  position: relative;
+  transition: background 0.22s;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+.extra .review-card::before {
+  content: "❝";
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  color: #c8aaff;
+  font-size: 26px;
+  opacity: 0.28;
+  margin-right: 8px;
+}
+.extra .review-author {
+  font-size: 13px;
+  color: #a5c7fa;
+  font-weight: bold;
+  margin-bottom: 4px;
+  margin-left: 5px;
+}
+
+/* -- Centered Similar Movies -- */
+.similar-movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px 20px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+.similar-movie-item {
+  width: 100px;
+  text-align: center;
+}
+.similar-movie-item img {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.similar-movie-title {
+  font-size: 15px;
+  line-height: 1.1;
+  margin-top: 0;
+  color: #fff;
+  word-break: break-word;
+}
+
+/* -- Responsive -- */
+@media (max-width: 900px) {
+  #movieList {
+    padding: 16px;
+    gap: 16px;
+  }
+  header {
+    flex-direction: column;
+    gap: 14px;
+  }
+}
+@media (max-width: 600px) {
+  #movieList {
+    grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+    gap: 8px;
+    padding: 6px;
+  }
+  .movie {
+    min-height: 300px;
+    padding: 10px 4px 4px 4px;
+  }
+  .movie img {
+    max-width: 96px;
+  }
+  header {
+    padding: 14px 5px;
+    min-height: unset;
+  }
+  #searchInput {
+    width: 100%;
+    font-size: 15px;
+    padding: 10px 13px;
+  }
+  #movieSectionTitle {
+    margin: 14px 0 6px 10px;
+    font-size: 1.1rem;
+  }
+}

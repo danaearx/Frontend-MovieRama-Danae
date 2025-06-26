@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MovieRama</title>
+    <!-- Responsive for mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Main styling -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header with logo/title and search bar -->
+    <header>
+      <h1>MovieRama 🎬</h1>
+      <input type="text" id="searchInput" placeholder="Search for a movie..." />
+    </header>
+    <!-- Section title goes here -->
+    <div id="movieSectionTitle"></div>
+    <!-- Main grid for movies -->
+    <main id="movieList"></main>
+    <!-- Loader for infinite scroll -->
+    <div id="loader"><span class="spinner"></span> Loading...</div>
+    <!-- Main JavaScript logic -->
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
