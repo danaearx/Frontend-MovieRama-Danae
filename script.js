@@ -61,7 +61,7 @@ function buildUrl() {
 
 /**
  * Fetch and render movies (handles infinite scroll and search)
- * isNewSearch: boolean - true όταν ξεκινά νέα αναζήτηση (καθαρίζει το movieList)
+ * isNewSearch: boolean - true when starting a new search (clears the movieList)
  */
 async function fetchMovies(isNewSearch = false) {
   if (isLoading || page > totalPages) return;
@@ -98,9 +98,9 @@ async function fetchMovies(isNewSearch = false) {
   loader.style.display = page > totalPages ? "none" : "block";
 
   /**
-   * Fallback: Αν το παράθυρο δεν έχει γεμίσει με results
-   * (π.χ. ο χρήστης είναι σε μεγάλο monitor), φέρε επόμενη σελίδα
-   * ώστε να γεμίσει το UI, και όχι να αφήνει “τρύπες”.
+   * Fallback: If the viewport is not filled with results
+   * (e.g. user has a very large monitor), automatically fetch the next page
+   * so the UI fills up and there are no empty gaps.
    */
   setTimeout(() => {
     const doc = document.documentElement;
