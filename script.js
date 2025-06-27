@@ -1,6 +1,6 @@
 /**
  * MovieRama - Front End Assignment
- * Author: Danae
+ * Author: Danae Archontouli
  * Description: Single Page App (SPA) για προβολή ταινιών με TMDB API,
  * infinite scroll, search, trailer, reviews και similar movies.
  */
